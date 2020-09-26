@@ -11,23 +11,23 @@ leaderRouter.use(bodyParser.json());
 leaderRouter.route('/')
   .get((req, res, next) => {
       
-    Dishes.find({})
-      .then((dishes) => {
+    Leaders.find({})
+      .then((leaders) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(dishes);
+        res.json(leaders);
       }, (err) => next(err))
       .catch((err) => next(err));
 
   })
   .post((req, res, next) => {
     
-    Dishes.create(req.body)
-      .then((dish) => {
-        console.log('Dish created', dish);
+    Leaders.create(req.body)
+      .then((leader) => {
+        console.log('Leader created', leader);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(dish);
+        res.json(leader);
       }, (err) => next(err))
       .catch((err) => next(err));
 
@@ -35,12 +35,12 @@ leaderRouter.route('/')
   .put((req, res, next) => {
 
     res.statusCode = 403;
-    res.end('PUT operation not supported on /dishes');
+    res.end('PUT operation not supported on /leaders');
 
   })
   .delete((req, res, next) => {
 
-    Dishes.remove({})
+    Leaders.remove({})
       .then((resp) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -53,11 +53,11 @@ leaderRouter.route('/')
 leaderRouter.route('/:leaderId')
   .get((req, res, next) => {
 
-    Dishes.findById(req.params.dishId)
-      .then((dish) => {
+    Leaders.findById(req.params.leaderId)
+      .then((leader) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(dish);
+        res.json(leader);
       }, (err) => next(err))
       .catch((err) => next(err));
 
@@ -65,25 +65,25 @@ leaderRouter.route('/:leaderId')
   .post((req, res, next) => {
 
     res.statusCode = 403;
-    res.end('POST operation not supported on /dishes/' + req.params.dishId);
+    res.end('POST operation not supported on /leaders/' + req.params.leaderId);
 
   })
   .put((req, res, next) => {
 
-    Dishes.findByIdAndUpdate(req.params.dishId, { 
+    Leaders.findByIdAndUpdate(req.params.leaderId, { 
       $set: req.body
     }, {new: true})
-      .then((dish) => {
+      .then((leader) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(dish);
+        res.json(leader);
       }, (err) => next(err))
       .catch((err) => next(err));
 
   })
   .delete((req, res, next) => {
 
-    Dishes.findByIdAndRemove(req.params.dishId)
+    Leaders.findByIdAndRemove(req.params.leaderId)
       .then((resp) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');

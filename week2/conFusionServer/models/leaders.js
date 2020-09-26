@@ -35,6 +35,6 @@ const leadersSchema = new Schema({
     timestamps: true
   });
 
-var Leaders = mongoose.model('Dish', leadersSchema);
+var Leaders = mongoose.model('Leader', leadersSchema);
 
 module.exports = Leaders;
